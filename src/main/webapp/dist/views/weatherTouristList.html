@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" href="../assets/js/plugins/layui/css/layui.css" media="all"/>
+    <link rel="stylesheet" href="../assets/css/user.css" media="all"/>
+</head>
+<body>
+
+<div class="admin-main">
+    <blockquote class="layui-elem-quote">
+
+        <div class="layui-input-block"
+             style="display: inline-block; margin-left: 30px; min-height: inherit; vertical-align: bottom;">
+            <input type="text" name="keyword" id="keyword" required lay-verify="keyword" class="layui-input"
+                   autocomplete="off" placeholder="请输入搜索关键词" style="height: 30px; line-height: 30px;" value="">
+        </div>
+        <a href="javascript:;" class="layui-btn layui-btn-small" id="search">
+            <i class="layui-icon">&#xe615;</i> 搜索
+        </a>
+        <a href="javascript:;" class="layui-btn layui-btn-small" id="searchAll">
+            <i class="layui-icon">&#xe615;</i> 查看全部
+        </a>
+    </blockquote>
+    <fieldset class="layui-elem-field">
+        <legend>天气管理</legend>
+        <!--区域表格-->
+        <div class="layui-main">
+            <div class="layui-form">
+                <table class="layui-table">
+                    <colgroup>
+
+                        <col width="300">
+                        <col width="600">
+                        <col width="200">
+                        <col>
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th>景区</th>
+                        <th>地址</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <tr>
+                        <td>九寨沟</td>
+                        <td>四川省边界</td>
+
+                        <td>
+                            <a href="weather.html" data-id="1" class="layui-btn layui-btn-mini edit">编辑</a>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>黄龙溪</td>
+                        <td>成都</td>
+
+                        <td>
+                            <a href="weather.html" data-id="2" class="layui-btn layui-btn-mini edit">编辑</a>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>诺带</td>
+                        <td>成都</td>
+
+                        <td>
+                            <a href="weather.html" data-id="3" class="layui-btn layui-btn-mini edit">编辑</a>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>五指山</td>
+                        <td>海南</td>
+
+                        <td>
+                            <a href="weather.html" data-id="4" class="layui-btn layui-btn-mini edit">编辑</a>
+
+                        </td>
+                    </tr>
+
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <td colspan="11">
+                            <div class="pages-pro-end"></div>
+                        </td>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </fieldset>
+</div>
+<div style="position: fixed;">
+    <div id="demo3" style="float:center"></div>
+</div>
+<script language="javascript">
+
+
+</script>
+</body>
+</html>

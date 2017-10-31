@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssm.maven.core.dao.ScenicDao">
+    <resultMap id="BaseResultMap" type="com.ssm.maven.core.entity.Scenicspot">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="scenicname" property="scenicname" jdbcType="VARCHAR"/>
+        <result column="address" property="address" jdbcType="VARCHAR"/>
+        <result column="telephone" property="telephone" jdbcType="VARCHAR"/>
+        <result column="max_people" property="max_people" jdbcType="INTEGER"/>
+        <result column="max_car" property="max_car" jdbcType="INTEGER"/>
+        <result column="create_time" property="create_time" jdbcType="DATE"/>
+        <result column="update_time" property="update_time" jdbcType="DATE"/>
+        <result column="creator" property="creator" jdbcType="INTEGER"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="updator" property="updator" jdbcType="INTEGER"/>
+        <result column="del_flag" property="del_flag" jdbcType="INTEGER"/>
+    </resultMap>
+
+
+    <sql id="Base_Column_List">
+        id, scenicname, address, telephone, max_people, max_car, create_time, update_time,
+    creator, status, updator, del_flag
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from scenicspot
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from scenicspot
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.ssm.maven.core.entity.Scenicspot">
+        insert into scenicspot (id, scenicname, address,
+        telephone, max_people, max_car,
+        create_time, update_time, creator,
+      status, updator, del_flag
+      )
+        values (#{id,jdbcType=INTEGER}, #{scenicname,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR},
+        #{telephone,jdbcType=VARCHAR}, #{max_people,jdbcType=INTEGER}, #{max_car,jdbcType=INTEGER},
+        #{create_time,jdbcType=DATE}, #{update_time,jdbcType=DATE}, #{creator,jdbcType=INTEGER},
+      #{status,jdbcType=INTEGER}, #{updator,jdbcType=INTEGER}, #{del_flag,jdbcType=INTEGER}
+      )
+  </insert>
+
+    <insert id="insertSelective" parameterType="com.ssm.maven.core.entity.Scenicspot">
+        insert into scenicspot
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="scenicname != null">
+                scenicname,
+            </if>
+            <if test="address != null">
+                address,
+            </if>
+            <if test="telephone != null">
+                telephone,
+            </if>
+            <if test="max_people != null">
+                max_people,
+            </if>
+            <if test="max_car != null">
+                max_car,
+            </if>
+            <if test="create_time != null">
+                create_time,
+            </if>
+            <if test="update_time != null">
+                update_time,
+            </if>
+            <if test="creator != null">
+                creator,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="updator != null">
+                updator,
+            </if>
+            <if test="del_flag != null">
+                del_flag,
+            </if>
+            <if test="code != null">
+                code,
+            </if>
+            <if test="scenictype != null">
+                scenictype,
+            </if>
+            <if test="max_di != null">
+                max_di,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="scenicname != null">
+                #{scenicname,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="telephone != null">
+                #{telephone,jdbcType=VARCHAR},
+            </if>
+            <if test="max_people != null">
+                #{max_people,jdbcType=INTEGER},
+            </if>
+            <if test="max_car != null">
+                #{max_car,jdbcType=INTEGER},
+            </if>
+            <if test="create_time != null">
+                #{create_time,jdbcType=DATE},
+            </if>
+            <if test="update_time != null">
+                #{update_time,jdbcType=DATE},
+            </if>
+            <if test="creator != null">
+                #{creator,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="updator != null">
+                #{updator,jdbcType=INTEGER},
+            </if>
+            <if test="del_flag != null">
+                #{del_flag,jdbcType=INTEGER},
+            </if>
+            <if test="code != null">
+                #{code,jdbcType=VARCHAR},
+            </if>
+            <if test="scenictype != null">
+                #{scenictype,jdbcType=INTEGER},
+            </if>
+            <if test="max_di != null">
+                #{max_di,jdbcType=},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.ssm.maven.core.entity.Scenicspot">
+        update scenicspot
+        <set>
+            <if test="scenicname != null">
+                scenicname = #{scenicname,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                address = #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="telephone != null">
+                telephone = #{telephone,jdbcType=VARCHAR},
+            </if>
+            <if test="max_people != null">
+                max_people = #{max_people,jdbcType=INTEGER},
+            </if>
+            <if test="max_car != null">
+                max_car = #{max_car,jdbcType=INTEGER},
+            </if>
+            <if test="create_time != null">
+                create_time = #{create_time,jdbcType=DATE},
+            </if>
+            <if test="update_time != null">
+                update_time = #{update_time,jdbcType=DATE},
+            </if>
+            <if test="creator != null">
+                creator = #{creator,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="updator != null">
+                updator = #{updator,jdbcType=INTEGER},
+            </if>
+            <if test="del_flag != null">
+                del_flag = #{del_flag,jdbcType=INTEGER},
+            </if>
+            <if test="code != null">
+                code = #{code,jdbcType=VARCHAR},
+            </if>
+            <if test="scenictype != null">
+                scenictype = #{scenictype,jdbcType=INTEGER},
+            </if>
+            <if test="max_di != null">
+                max_di = #{max_di,jdbcType=DOUBLE},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.ssm.maven.core.entity.Scenicspot">
+    update scenicspot
+    set scenicname = #{scenicname,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      telephone = #{telephone,jdbcType=VARCHAR},
+      max_people = #{max_people,jdbcType=INTEGER},
+      max_car = #{max_car,jdbcType=INTEGER},
+        create_time = #{create_time,jdbcType=DATE},
+        update_time = #{update_time,jdbcType=DATE},
+      creator = #{creator,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      updator = #{updator,jdbcType=INTEGER},
+      del_flag = #{del_flag,jdbcType=INTEGER},
+      code = #{code,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+    <select id="getScenicspotAll" parameterType="com.ssm.maven.core.entity.Scenicspot"
+            resultType="com.ssm.maven.core.entity.Scenicspot">
+        SELECT * FROM scenicspot WHERE del_flag = 1
+    </select>
+
+    <select id="getScenicspotByName" parameterType="java.lang.String" resultType="com.ssm.maven.core.entity.Scenicspot">
+        SELECT * FROM scenicspot WHERE del_flag = 1 AND scenicname = #{scenicname}
+    </select>
+
+    <select id="getScenicspotById" parameterType="java.lang.Integer" resultType="com.ssm.maven.core.entity.Scenicspot">
+        SELECT * FROM scenicspot WHERE del_flag = 1 AND id = #{id}
+    </select>
+
+    <select id="getScenicspotByCode" parameterType="java.lang.String" resultType="com.ssm.maven.core.entity.Scenicspot">
+        SELECT * FROM tourist.scenicspot WHERE  del_flag = 1 AND  code = #{code} limit 1
+    </select>
+
+    <select id="getScenicspotlistByCode" parameterType="java.lang.String"
+            resultType="com.ssm.maven.core.entity.Scenicspot">
+        SELECT * FROM tourist.scenicspot WHERE  del_flag = 1 AND  code = #{code}
+    </select>
+
+    <update id="updateByCode" parameterType="com.ssm.maven.core.entity.Scenicspot">
+        update scenicspot
+        <set>
+            <if test="scenicname != null">
+                scenicname = #{scenicname,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                address = #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="telephone != null">
+                telephone = #{telephone,jdbcType=VARCHAR},
+            </if>
+            <if test="max_people != null">
+                max_people = #{max_people,jdbcType=INTEGER},
+            </if>
+            <if test="max_car != null">
+                max_car = #{max_car,jdbcType=INTEGER},
+            </if>
+            <if test="create_time != null">
+                create_time = #{create_time,jdbcType=DATE},
+            </if>
+            <if test="update_time != null">
+                update_time = #{update_time,jdbcType=DATE},
+            </if>
+            <if test="creator != null">
+                creator = #{creator,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="updator != null">
+                updator = #{updator,jdbcType=INTEGER},
+            </if>
+            <if test="del_flag != null">
+                del_flag = #{del_flag,jdbcType=INTEGER},
+            </if>
+
+            <if test="scenictype != null">
+                scenictype=#{scenictype,jdbcType=INTEGER},
+            </if>
+            <if test="max_di != null">
+                max_di=#{max_di,jdbcType=DOUBLE},
+            </if>
+        </set>
+        where code= #{code,jdbcType=VARCHAR}
+    </update>
+
+    <update id="deleteByCode" parameterType="java.lang.String">
+        update scenicspot
+        <set>
+            del_flag = 0,
+        </set>
+        where code= #{code,jdbcType=VARCHAR}
+    </update>
+
+    <select id="getScenicspotAndDay" resultType="com.ssm.maven.core.entity.ScenicspotCustom">
+        SELECT DISTINCT scenicspot.*, a.enter_day from scenicspot,tourist a , tourist b WHERE scenicspot.id =
+        a.science_id and a.science_id != b.science_id AND a.del_flag = 1 AND b.del_flag = 1 ORDER by
+        scenicname,a.enter_day DESC
+    </select>
+
+    <select id="getpeopleInfor" parameterType="com.ssm.maven.core.entity.ScenicspotCustom"
+            resultType="com.ssm.maven.core.entity.ScenicspotCustom">
+        SELECT DISTINCT tourist.enter_day ,scenicspot.* FROM scenicspot,tourist WHERE scenicspot.code = #{code}
+        <if test="enter_day != null and enter_day !='' ">
+            <![CDATA[   AND DATE_FORMAT(tourist.enter_day, '%Y-%m-%d-%h-%I-%S')>=  DATE_FORMAT(#{enter_day}, '%Y-%m-%d-%h-%I-%S')   ]]>
+        </if>
+
+        <if test="end_day != null and end_day !='' ">
+            <![CDATA[   AND DATE_FORMAT(tourist.enter_day, '%Y-%m-%d-%h-%I-%S')<=  DATE_FORMAT(#{end_day}, '%Y-%m-%d-%h-%I-%S')   ]]>
+        </if>
+        AND tourist.science_id = scenicspot.id AND scenicspot.del_flag = 1 AND tourist.del_flag = 1 ORDER BY
+        tourist.enter_day DESC
+    </select>
+
+    <insert id="insertScenicspotList" useGeneratedKeys="true" parameterType="com.ssm.maven.core.entity.Scenicspot">
+        <selectKey resultType="long" keyProperty="id" order="AFTER">
+            SELECT
+            LAST_INSERT_ID()
+        </selectKey>
+        insert into scenicspot
+        (scenicname,address,telephone,max_people,max_car,status,del_flag,create_time,creator,update_time,updator,code,max_di,scenictype)
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.scenicname},#{item.address},#{item.telephone},#{item.max_people},#{item.max_car},#{item.status},1,#{item.create_time},#{item.creator},#{item.update_time},#{item.updator},#{item.code},#{item.max_di},#{item.scenictype})
+        </foreach>
+    </insert>
+
+</mapper>

@@ -1,0 +1,139 @@
+<meta charset="UTF-8">
+<script src="../js/echarts.min.js"></script>
+<script src="../js/vintage.js"></script>
+<script src="../assets/js/plugins/layui/layui.js"></script>
+<div id="main" style="width:1000px;height:800px;"></div>
+<script type="text/javascript">
+    layui.use(['jquery',], function (args) {
+        var $ = layui.jquery;
+
+        var myChart = echarts.init(document.getElementById('main'));
+        $.get('../assets/di.json', function (data) {
+            myChart.setOption(option = {
+                title: {
+                    text: '天气舒适指数'
+                },
+                tooltip: {
+                    trigger: 'axis'
+                },
+                xAxis: {
+                    data: data.map(function (item) {
+                        return item[0];
+                    })
+                },
+                yAxis: {
+                    splitLine: {
+                        show: false
+                    }
+                },
+                toolbox: {
+                    left: 'center',
+                    feature: {
+                        dataZoom: {
+                            yAxisIndex: 'none'
+                        },
+                        restore: {},
+                        saveAsImage: {}
+                    }
+                },
+                dataZoom: [{
+                    startValue: '2014-06-01'
+                }, {
+                    type: 'inside'
+                }],
+                visualMap: {
+                    top: 10,
+                    right: 5,
+                    pieces: [{
+                        gt: 0,
+                        lte: 40,
+                        color: '#130d99'
+                    }, {
+                        gt: 40,
+                        lte: 45,
+                        color: '#2c6bff'
+                    }, {
+                        gt: 45,
+                        lte: 55,
+                        color: '#3fb4ff'
+                    }, {
+                        gt: 55,
+                        lte: 60,
+                        color: '#36cc95'
+                    }, {
+                        gt: 60,
+                        lte: 65,
+                        color: '#479948'
+                    }, {
+                        gt: 65,
+                        lte: 70,
+                        color: '#779910'
+                    }, {
+                        gt: 70,
+                        lte: 75,
+                        color: '#ffff00'
+                    }, {
+                        gt: 75,
+                        lte: 80,
+                        color: '#996803'
+                    }, {
+                        gt: 80,
+                        color: '#7e0102'
+                    }],
+                    outOfRange: {
+                        color: '#991006'
+                    }
+                },
+                series: {
+                    name: '天气舒适指数',
+                    type: 'line',
+                    data: data.map(function (item) {
+                        return item[1];
+                    }),
+                    markLine: {
+                        silent: true,
+                        data: [{
+                            yAxis: 5
+                        }, {
+                            yAxis: 10
+                        }, {
+                            yAxis: 15
+                        }, {
+                            yAxis: 20
+                        }, {
+                            yAxis: 25
+                        }, {
+                            yAxis: 30
+                        }, {
+                            yAxis: 35
+                        }, {
+                            yAxis: 40
+                        }, {
+                            yAxis: 45
+                        }, {
+                            yAxis: 50
+                        }, {
+                            yAxis: 55
+                        }, {
+                            yAxis: 60
+                        }, {
+                            yAxis: 65
+                        }, {
+                            yAxis: 70
+                        }, {
+                            yAxis: 75
+                        }, {
+                            yAxis: 80
+                        }, {
+                            yAxis: 85
+                        }, {
+                            yAxis: 90
+                        }]
+                    }
+                }
+            });
+        });
+
+    });
+
+</script>

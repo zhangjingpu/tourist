@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssm.maven.core.dao.TemperatureDao">
+    <!--查找所有的Di景区-->
+    <select id="getAllScinceDI" resultType="com.ssm.maven.core.entity.DiCustom">
+       SELECT DISTINCT di_table.time_date,scenicspot.code,scenicspot.address,scenicspot.scenicname
+        FROM di_table,scenicspot
+        WHERE di_table.scenic_id=scenicspot.code AND scenicspot.del_flag=1 AND di_table.del_flag=1
+        ORDER BY scenicspot.code ASC, di_table.time_date ASC
+    </select>
+
+    <!--根据时间和景区名查询-->
+    <select id="findScenicAndTime" parameterType="com.ssm.maven.core.entity.DiCustom"
+            resultType="com.ssm.maven.core.entity.DiCustom">
+        SELECT DISTINCT di_table.time_date,scenicspot.code,scenicspot.address,scenicspot.scenicname
+        FROM di_table,scenicspot
+        WHERE di_table.scenic_id=scenicspot.code AND scenicspot.del_flag=1 AND di_table.del_flag=1
+        <if test="start_time != null and start_time != '' and end_time != null and end_time!='' ">
+            AND di_table.time_date between #{start_time} and #{end_time}
+        </if>
+        <if test="start_time != null and start_time != '' and end_time == null ">
+            AND di_table.time_date <![CDATA[>=]]> #{start_time}
+        </if>
+        <if test="end_time != null and end_time!='' and start_time == null ">
+            AND di_table.time_date <![CDATA[<=]]> #{end_time}
+        </if>
+        AND scenicname=#{scenicname}
+        ORDER BY scenicspot.code ASC, di_table.time_date ASC
+    </select>
+
+    <!--获取指定景区当天的气温信息-->
+    <select id="getAllTemperatures" parameterType="com.ssm.maven.core.entity.DiTable"
+            resultType="com.ssm.maven.core.entity.DiTable">
+        SELECT * FROM di_table WHERE del_flag=1 AND time_date=#{time_date} AND scenic_id=#{scenic_id} ORDER BY time_hour ASC
+    </select>
+
+    <!---获取指定的小时温度信息-->
+    <select id="getTemByTimeAndId" parameterType="com.ssm.maven.core.entity.DiTable"
+            resultType="com.ssm.maven.core.entity.DiTable">
+        SELECT * FROM di_table WHERE time_date=#{time_date} AND time_hour=#{time_hour} AND scenic_id=#{scenic_id} AND del_flag=1
+    </select>
+
+    <!--修改指定的小时温度信息-->
+    <update id="editTem" parameterType="com.ssm.maven.core.entity.DiTable">
+        UPDATE di_table SET relative_humidity=#{relative_humidity},celsius=#{celsius} WHERE id=#{id}
+    </update>
+
+    <!--查询指定时间天气，为了判断添加是否重复-->
+    <select id="selectTemp" parameterType="com.ssm.maven.core.entity.DiTable"
+            resultType="com.ssm.maven.core.entity.DiTable">
+        SELECT * FROM di_table WHERE del_flag=1 AND time_hour=#{time_hour} AND scenic_id=#{scenic_id} AND time_date=#{time_date}
+    </select>
+    <!--添加时间天气-->
+    <insert id="addTep" parameterType="com.ssm.maven.core.entity.DiTable">
+        INSERT INTO di_table (time_hour,celsius,time_date,relative_humidity,scenic_id)
+        VALUES(#{time_hour},#{celsius},#{time_date},#{relative_humidity},#{scenic_id})
+    </insert>
+    <!--删除时间天气-->
+    <update id="delTem" parameterType="com.ssm.maven.core.entity.DiTable">
+        UPDATE di_table SET del_flag=0 WHERE id=#{id}
+    </update>
+
+    <!--删除景区天气-->
+    <update id="deleletScenic" parameterType="com.ssm.maven.core.entity.DiTable">
+        UPDATE di_table SET  del_flag=0 WHERE time_date=#{time_date} AND scenic_id=#{scenic_id}
+    </update>
+
+    <!--文件导入-->
+    <insert id="insertCarBatch" parameterType="java.util.List">
+
+        INSERT INTO di_table
+        (celsius,relative_humidity,time_hour,time_date,del_flag,scenic_id)
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.celsius},#{item.relative_humidity},#{item.time_hour},#{item.time_date},#{item.del_flag},#{item.scenic_id})
+        </foreach>
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+            select LAST_INSERT_ID();
+        </selectKey>
+    </insert>
+
+    <!--获取所有的DI信息，导出功能-->
+    <select id="getAllDI" resultType="com.ssm.maven.core.entity.DiCustom">
+        SELECT di_table.*,scenicspot.code,scenicspot.address,scenicspot.scenicname FROM di_table,scenicspot WHERE di_table.scenic_id=scenicspot.code AND di_table.del_flag=1 AND scenicspot.del_flag=1
+    </select>
+</mapper>

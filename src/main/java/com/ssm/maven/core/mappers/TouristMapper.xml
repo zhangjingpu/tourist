@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssm.maven.core.mappers.TouristMapper">
+    <resultMap id="BaseResultMap" type="com.ssm.maven.core.entity.Tourist">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="tourist_type" property="touristType" jdbcType="INTEGER"/>
+        <result column="enter_day" property="enterDay" jdbcType="DATE"/>
+        <result column="science_id" property="scienceId" jdbcType="INTEGER"/>
+        <result column="enter_time" property="enterTime" jdbcType="TIMESTAMP"/>
+        <result column="leave_time" property="leaveTime" jdbcType="TIMESTAMP"/>
+        <result column="del_flag" property="delFlag" jdbcType="INTEGER"/>
+        <result column="tourist_code" property="touristCode" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, tourist_type, enter_day, science_id, enter_time, leave_time, del_flag, tourist_code
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from tourist
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tourist
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.ssm.maven.core.entity.Tourist">
+    insert into tourist (id, tourist_type, enter_day, 
+      science_id, enter_time, leave_time, 
+      del_flag, tourist_code)
+    values (#{id,jdbcType=INTEGER}, #{touristType,jdbcType=INTEGER}, #{enterDay,jdbcType=DATE}, 
+      #{scienceId,jdbcType=INTEGER}, #{enterTime,jdbcType=TIMESTAMP}, #{leaveTime,jdbcType=TIMESTAMP}, 
+      #{delFlag,jdbcType=INTEGER}, #{touristCode,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.ssm.maven.core.entity.Tourist">
+        insert into tourist
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="touristType != null">
+                tourist_type,
+            </if>
+            <if test="enterDay != null">
+                enter_day,
+            </if>
+            <if test="scienceId != null">
+                science_id,
+            </if>
+            <if test="enterTime != null">
+                enter_time,
+            </if>
+            <if test="leaveTime != null">
+                leave_time,
+            </if>
+            <if test="delFlag != null">
+                del_flag,
+            </if>
+            <if test="touristCode != null">
+                tourist_code,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="touristType != null">
+                #{touristType,jdbcType=INTEGER},
+            </if>
+            <if test="enterDay != null">
+                #{enterDay,jdbcType=DATE},
+            </if>
+            <if test="scienceId != null">
+                #{scienceId,jdbcType=INTEGER},
+            </if>
+            <if test="enterTime != null">
+                #{enterTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="leaveTime != null">
+                #{leaveTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="delFlag != null">
+                #{delFlag,jdbcType=INTEGER},
+            </if>
+            <if test="touristCode != null">
+                #{touristCode,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ssm.maven.core.entity.Tourist">
+        update tourist
+        <set>
+            <if test="touristType != null">
+                tourist_type = #{touristType,jdbcType=INTEGER},
+            </if>
+            <if test="enterDay != null">
+                enter_day = #{enterDay,jdbcType=DATE},
+            </if>
+            <if test="scienceId != null">
+                science_id = #{scienceId,jdbcType=INTEGER},
+            </if>
+            <if test="enterTime != null">
+                enter_time = #{enterTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="leaveTime != null">
+                leave_time = #{leaveTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="delFlag != null">
+                del_flag = #{delFlag,jdbcType=INTEGER},
+            </if>
+            <if test="touristCode != null">
+                tourist_code = #{touristCode,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.ssm.maven.core.entity.Tourist">
+    update tourist
+    set tourist_type = #{touristType,jdbcType=INTEGER},
+      enter_day = #{enterDay,jdbcType=DATE},
+      science_id = #{scienceId,jdbcType=INTEGER},
+      enter_time = #{enterTime,jdbcType=TIMESTAMP},
+      leave_time = #{leaveTime,jdbcType=TIMESTAMP},
+      del_flag = #{delFlag,jdbcType=INTEGER},
+      tourist_code = #{touristCode,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

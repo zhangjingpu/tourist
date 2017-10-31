@@ -1,0 +1,155 @@
+<meta charset="UTF-8">
+<script src="../js/echarts.min.js"></script>
+<script src="../js/vintage.js"></script>
+<script src="../assets/js/plugins/layui/layui.js"></script>
+<div id="main" style="width:1000px;height:800px;"></div>
+<script type="text/javascript">
+    var myChart = echarts.init(document.getElementById('main'));
+    var app = new Object();
+    var option = {
+        title: {
+            text: '人流承载量',
+            subtext: '纯属虚构'
+        },
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: 'cross',
+                label: {
+                    backgroundColor: '#c5ccc7'
+                }
+            }
+        },
+        legend: {
+            data: ['人流承载量', '景区最大人流承载量', '实时人流量']
+        },
+        toolbox: {
+            right: '0',
+            bottom: '0',
+            show: true,
+            feature: {
+                dataView: {readOnly: false},
+                restore: {},
+                saveAsImage: {}
+            }
+        }, visualMap: {
+            top: 90,
+            right: 0,
+            pieces: [{
+                gt: 0,
+                lte: 80,
+                color: '#42992b'
+            }, {
+                gt: 90,
+                lte: 100,
+                color: '#995b00'
+            }, {
+                gt: 100,
+                color: '#e10000'
+            }],
+            outOfRange: {
+                color: '#e10000'
+            }
+        },
+        dataZoom: {
+            show: false,
+            start: 0,
+            end: 100
+        },
+        xAxis: [
+            {
+                type: 'category',
+                boundaryGap: true,
+                data: (function () {
+                    var now = new Date();
+                    var res = [];
+                    var len = 10;
+                    while (len--) {
+                        res.unshift(now.toLocaleTimeString().replace(/^\D*/, ''));
+                        now = new Date(now - 2000);
+                    }
+                    return res;
+                })()
+            },
+            {
+                type: 'category',
+                boundaryGap: true,
+                data: (function () {
+                    var res = [];
+                    var len = 10;
+                    while (len--) {
+                        res.push(len + 1);
+                    }
+                    return res;
+                })()
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value',
+                scale: true,
+                name: '人流承载量(%)',
+                max: 100,
+                min: 0,
+                boundaryGap: [0.2, 0.2]
+            },
+            {
+                type: 'value',
+                scale: true,
+                name: '实时人流量',
+                max: 200,
+                min: 0,
+                boundaryGap: [0.2, 0.2]
+            }
+        ],
+        series: [
+            {
+                name: '实时人流量',
+                type: 'bar',
+                xAxisIndex: 1,
+                yAxisIndex: 1,
+                data: (function () {
+                    var res = [];
+                    var len = 10;
+                    while (len--) {
+                        res.push((Math.random() * 10 + 1).toFixed(1) - 0);
+                    }
+                    return res;
+                })()
+            },
+            {
+                name: '人流承载量',
+                type: 'line',
+                data: (function () {
+                    var res = [];
+                    var len = 0;
+                    while (len < 10) {
+                        res.push((Math.random() * 10 + 5).toFixed(1) - 0);
+                        len++;
+                    }
+                    return res;
+                })()
+            }
+        ]
+    };
+
+    app.count = 11;
+    setInterval(function () {
+        axisData = (new Date()).toLocaleTimeString().replace(/^\D*/, '');
+
+        var data0 = option.series[0].data;
+        var data1 = option.series[1].data;
+        data0.shift();
+        data0.push(Math.round(Math.random() * 120));
+        data1.shift();
+        data1.push((Math.random() * 80 + 5).toFixed(1) - 0);
+
+        option.xAxis[0].data.shift();
+        option.xAxis[0].data.push(axisData);
+        option.xAxis[1].data.shift();
+        option.xAxis[1].data.push(app.count++);
+
+        myChart.setOption(option);
+    }, 2100);
+
+</script>

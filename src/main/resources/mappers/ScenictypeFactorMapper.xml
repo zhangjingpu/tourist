@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssm.maven.core.dao.ScenictypeFactorDao">
+    <resultMap id="BaseResultMap" type="com.ssm.maven.core.entity.ScenictypeFactor">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="scenictype_id" jdbcType="INTEGER" property="scenictype_id"/>
+        <result column="scenictype_name" jdbcType="VARCHAR" property="scenictype_name"/>
+        <result column="scenictype_value" jdbcType="VARCHAR" property="scenictype_value"/>
+        <result column="del_flag" jdbcType="INTEGER" property="del_flag"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, scenictype_id, scenictype_name, scenictype_value, del_flag
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from scenictype_factor
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from scenictype_factor
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.ssm.maven.core.entity.ScenictypeFactor">
+        insert into scenictype_factor (id, scenictype_id, scenictype_name,
+        scenictype_value, del_flag)
+        values (#{id,jdbcType=INTEGER}, #{scenictype_id,jdbcType=INTEGER}, #{scenictype_name,jdbcType=VARCHAR},
+        #{scenictype_value,jdbcType=VARCHAR}, #{del_flag,jdbcType=INTEGER})
+    </insert>
+    <insert id="insertSelective" parameterType="com.ssm.maven.core.entity.ScenictypeFactor">
+        insert into scenictype_factor
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="scenictype_id != null">
+                scenictype_id,
+            </if>
+            <if test="scenictype_name != null">
+                scenictype_name,
+            </if>
+            <if test="scenictype_value != null">
+                scenictype_value,
+            </if>
+            <if test="del_flag != null">
+                del_flag,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="scenictype_id != null">
+                #{scenictype_id,jdbcType=INTEGER},
+            </if>
+            <if test="scenictype_name != null">
+                #{scenictype_name,jdbcType=VARCHAR},
+            </if>
+            <if test="scenictype_value != null">
+                #{scenictype_value,jdbcType=VARCHAR},
+            </if>
+            <if test="del_flag != null">
+                #{del_flag,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ssm.maven.core.entity.ScenictypeFactor">
+        update scenictype_factor
+        <set>
+            <if test="scenictype_id != null">
+                scenictype_id = #{scenictype_id,jdbcType=INTEGER},
+            </if>
+            <if test="scenictype_name != null">
+                scenictype_name = #{scenictype_name,jdbcType=VARCHAR},
+            </if>
+            <if test="scenictype_value != null">
+                scenictype_value = #{scenictype_value,jdbcType=VARCHAR},
+            </if>
+            <if test="del_flag != null">
+                del_flag = #{del_flag,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.ssm.maven.core.entity.ScenictypeFactor">
+        update scenictype_factor
+        set scenictype_id = #{scenictype_id,jdbcType=INTEGER},
+        scenictype_name = #{scenictype_name,jdbcType=VARCHAR},
+        scenictype_value = #{scenictype_value,jdbcType=VARCHAR},
+        del_flag = #{del_flag,jdbcType=INTEGER}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <select id="getScenictypeFactorById" parameterType="com.ssm.maven.core.entity.ScenictypeFactor"
+            resultType="com.ssm.maven.core.entity.ScenictypeFactor">
+    SELECT * FROM scenictype_factor WHERE  del_flag = 1 AND scenictype_id = #{scenictype_id}
+  </select>
+    <insert id="insertScenictypeFactor" parameterType="com.ssm.maven.core.entity.ScenictypeFactor">
+        insert into scenictype_factor (scenictype_name, scenictype_value,scenictype_id,
+      del_flag)
+    values ( #{scenictype_name,jdbcType=VARCHAR},#{scenictype_value,jdbcType=VARCHAR},#{scenictype_id,jdbcType=INTEGER},
+      1)
+    </insert>
+
+    <select id="getScenictypeFactorByName" parameterType="com.ssm.maven.core.entity.ScenictypeFactor"
+            resultType="com.ssm.maven.core.entity.ScenictypeFactor">
+        SELECT * FROM scenictype_factor WHERE  del_flag = 1 AND scenictype_name = #{scenictype_name} AND scenictype_id = #{scenictype_id}
+    </select>
+
+    <update id="deleteScenicFactorById" parameterType="com.ssm.maven.core.entity.ScenictypeFactor">
+        UPDATE scenictype_factor s SET s.del_flag = 0 WHERE s.id = #{id}
+    </update>
+
+    <update id="deleteScenicFactorByScenicid" parameterType="com.ssm.maven.core.entity.ScenictypeFactor">
+        UPDATE scenictype_factor s SET s.del_flag = 0 WHERE s.scenictype_id = #{scenictype_id}
+    </update>
+</mapper>

@@ -1,0 +1,77 @@
+{
+  "rel": true,
+  "msg": "获取成功",
+  "list": [
+    {
+      "id": 1,
+      "name": "石象湖1",
+      "address": "成都市蒲江县",
+      "number": "15928588606",
+      "max_man": "10000",
+      "createtime": "2017-01-10 10:42:36",
+      "creator": "booksun",
+      "status": "开放"
+    },
+    {
+      "id": 2,
+      "name": "龙门客栈",
+      "address": "成都市蒲江县",
+      "number": "15928588606",
+      "max_man": "10000",
+      "createtime": "2017-01-10 10:42:36",
+      "creator": "booksun",
+      "status": "开放"
+    },
+    {
+      "id": 3,
+      "name": "欢乐谷",
+      "address": "成都市蒲江县",
+      "number": "15928588606",
+      "max_man": "10000",
+      "createtime": "2017-01-10 10:42:36",
+      "creator": "booksun",
+      "status": "开放"
+    },
+    {
+      "id": 4,
+      "name": "成都信息工程大学",
+      "address": "成都市双流县",
+      "number": "15928588606",
+      "max_man": "10000",
+      "createtime": "2017-01-10 10:42:36",
+      "creator": "booksun",
+      "status": "关闭"
+    },
+    {
+      "id": 5,
+      "name": "成都信息工程大学",
+      "address": "成都市双流县",
+      "number": "15928588606",
+      "max_man": "10000",
+      "createtime": "2017-01-10 10:42:36",
+      "creator": "booksun",
+      "status": "关闭"
+    },
+    {
+      "id": 6,
+      "name": "成都信息工程大学",
+      "address": "成都市双流县",
+      "number": "15928588606",
+      "max_man": "10000",
+      "createtime": "2017-01-10 10:42:36",
+      "creator": "booksun",
+      "status": "关闭"
+    },
+    {
+      "id": 7,
+      "name": "成都信息工程大学",
+      "address": "成都市双流县",
+      "number": "15928588606",
+      "max_man": "10000",
+      "createtime": "2017-01-10 10:42:36",
+      "creator": "booksun",
+      "status": "关闭"
+    }
+  ],
+  "count": 7
+}

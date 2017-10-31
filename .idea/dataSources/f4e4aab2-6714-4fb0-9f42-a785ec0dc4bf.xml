@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="tourist@120.77.223.41">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.4">
+    <root id="1"/>
+    <schema id="2" parent="1" name="tourist">
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="3" parent="1" name="db_ssm"/>
+    <schema id="4" parent="1" name="information_schema"/>
+    <schema id="5" parent="1" name="itronys"/>
+    <schema id="6" parent="1" name="mysql"/>
+    <schema id="7" parent="1" name="nyxt"/>
+    <schema id="8" parent="1" name="performance_schema"/>
+    <schema id="9" parent="1" name="shiro"/>
+    <schema id="10" parent="1" name="shiro2"/>
+    <schema id="11" parent="1" name="shop"/>
+    <schema id="12" parent="1" name="ssm_demo_db"/>
+    <table id="13" parent="2" name="di_table"/>
+    <table id="14" parent="2" name="menu"/>
+    <table id="15" parent="2" name="park"/>
+    <table id="16" parent="2" name="parking_car"/>
+    <table id="17" parent="2" name="scenicspot"/>
+    <table id="18" parent="2" name="scenictype"/>
+    <table id="19" parent="2" name="scenictype_factor"/>
+    <table id="20" parent="2" name="sys_user"/>
+    <table id="21" parent="2" name="tourist"/>
+    <column id="22" parent="13" name="id">
+      <Position>1</Position>
+      <Comment>天气主键</Comment>
+      <DataType>int(225)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="23" parent="13" name="celsius">
+      <Position>2</Position>
+      <Comment>摄氏度</Comment>
+      <DataType>double(100,1)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="24" parent="13" name="fahrenheit">
+      <Position>3</Position>
+      <Comment>华氏度</Comment>
+      <DataType>double(100,3)|0</DataType>
+    </column>
+    <column id="25" parent="13" name="relative_humidity">
+      <Position>4</Position>
+      <Comment>想对湿度 %</Comment>
+      <DataType>double(100,2)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="26" parent="13" name="time_hour">
+      <Position>5</Position>
+      <Comment>时间(h)</Comment>
+      <DataType>int(20)|0</DataType>
+    </column>
+    <column id="27" parent="13" name="time_date">
+      <Position>6</Position>
+      <Comment>日期</Comment>
+      <DataType>date|0</DataType>
+    </column>
+    <column id="28" parent="13" name="DI">
+      <Position>7</Position>
+      <Comment>天气舒适指数</Comment>
+      <DataType>double(100)|0</DataType>
+    </column>
+    <column id="29" parent="13" name="del_flag">
+      <Position>8</Position>
+      <DataType>int(2)|0</DataType>
+      <DefaultExpression>&apos;1&apos;</DefaultExpression>
+    </column>
+    <column id="30" parent="13" name="type_weather">
+      <Position>9</Position>
+      <Comment>感觉程度</Comment>
+      <DataType>int(10)|0</DataType>
+    </column>
+    <column id="31" parent="13" name="scenic_id">
+      <Position>10</Position>
+      <Comment>景区id</Comment>
+      <DataType>int(225)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <key id="32" parent="13" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="33" parent="14" name="id">
+      <Position>1</Position>
+      <Comment>左侧菜单主键</Comment>
+      <DataType>int(225)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="34" parent="14" name="title">
+      <Position>2</Position>
+      <Comment>左侧菜单标题</Comment>
+      <DataType>varchar(50)|0</DataType>
+    </column>
+    <column id="35" parent="14" name="icon">
+      <Position>3</Position>
+      <Comment>左侧菜单图标</Comment>
+      <DataType>varchar(100)|0</DataType>
+    </column>
+    <column id="36" parent="14" name="url">
+      <Position>4</Position>
+      <Comment>左侧菜单地址</Comment>
+      <DataType>varchar(225)|0</DataType>
+    </column>
+    <column id="37" parent="14" name="spread">
+      <Position>5</Position>
+      <Comment>左侧菜单是否展开</Comment>
+      <DataType>varchar(10)|0</DataType>
+    </column>
+    <column id="38" parent="14" name="leavel">
+      <Position>6</Position>
+      <Comment>左侧菜单等级</Comment>
+      <DataType>int(5)|0</DataType>
+    </column>
+    <column id="39" parent="14" name="parent_id">
+      <Position>7</Position>
+      <DataType>int(5)|0</DataType>
+    </column>
+    <column id="40" parent="14" name="del_flag">
+      <Position>8</Position>
+      <Comment>删除标记</Comment>
+      <DataType>int(2)|0</DataType>
+    </column>
+    <key id="41" parent="14" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="42" parent="15" name="id">
+      <Position>1</Position>
+      <Comment>停车场主键</Comment>
+      <DataType>int(225)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="43" parent="15" name="parking_name">
+      <Position>2</Position>
+      <Comment>停车场名字</Comment>
+      <DataType>varchar(20)|0</DataType>
+    </column>
+    <column id="44" parent="15" name="scenic_id">
+      <Position>3</Position>
+      <Comment>景区ID</Comment>
+      <DataType>int(255)|0</DataType>
+    </column>
+    <column id="45" parent="15" name="creator">
+      <Position>4</Position>
+      <Comment>创建者</Comment>
+      <DataType>varchar(20)|0</DataType>
+    </column>
+    <column id="46" parent="15" name="updator">
+      <Position>5</Position>
+      <Comment>更新者</Comment>
+      <DataType>varchar(20)|0</DataType>
+      <DefaultExpression>&apos;&apos;</DefaultExpression>
+    </column>
+    <column id="47" parent="15" name="money">
+      <Position>6</Position>
+      <Comment>停车费</Comment>
+      <DataType>int(5)|0</DataType>
+    </column>
+    <column id="48" parent="15" name="create_time">
+      <Position>7</Position>
+      <Comment>创建时间</Comment>
+      <DataType>date|0</DataType>
+    </column>
+    <column id="49" parent="15" name="update_time">
+      <Position>8</Position>
+      <Comment>更新时间</Comment>
+      <DataType>date|0</DataType>
+    </column>
+    <column id="50" parent="15" name="del_flag">
+      <Position>9</Position>
+      <Comment>删除标记</Comment>
+      <DataType>int(2)|0</DataType>
+    </column>
+    <key id="51" parent="15" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="52" parent="16" name="id">
+      <Position>1</Position>
+      <DataType>int(255)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="53" parent="16" name="license_car">
+      <Position>2</Position>
+      <Comment>汽车牌照</Comment>
+      <DataType>varchar(10)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="54" parent="16" name="enter_time">
+      <Position>3</Position>
+      <Comment>进入时间</Comment>
+      <DataType>datetime|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="55" parent="16" name="leave_time">
+      <Position>4</Position>
+      <Comment>离开时间</Comment>
+      <DataType>datetime|0</DataType>
+    </column>
+    <column id="56" parent="16" name="car_type">
+      <Position>5</Position>
+      <Comment>汽车类型</Comment>
+      <DataType>int(2)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="57" parent="16" name="park_id">
+      <Position>6</Position>
+      <Comment>停车场ID</Comment>
+      <DataType>varchar(225)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="58" parent="16" name="del_flag">
+      <Position>7</Position>
+      <Comment>删除标记</Comment>
+      <DataType>int(2)|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;1&apos;</DefaultExpression>
+    </column>
+    <column id="59" parent="16" name="science_id">
+      <Position>8</Position>
+      <Comment>景区id</Comment>
+      <DataType>int(225)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="60" parent="16" name="day">
+      <Position>9</Position>
+      <DataType>date|0</DataType>
+    </column>
+    <key id="61" parent="16" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="62" parent="17" name="id">
+      <Position>1</Position>
+      <DataType>int(255)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="63" parent="17" name="scenictype">
+      <Position>2</Position>
+      <Comment>景区类型</Comment>
+      <DataType>int(100)|0</DataType>
+    </column>
+    <column id="64" parent="17" name="scenicname">
+      <Position>3</Position>
+      <Comment>景区名字</Comment>
+      <DataType>varchar(100)|0</DataType>
+    </column>
+    <column id="65" parent="17" name="address">
+      <Position>4</Position>
+      <Comment>景区地址</Comment>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="66" parent="17" name="telephone">
+      <Position>5</Position>
+      <Comment>景区电话</Comment>
+      <DataType>varchar(15)|0</DataType>
+    </column>
+    <column id="67" parent="17" name="max_people">
+      <Position>6</Position>
+      <Comment>最大人流量</Comment>
+      <DataType>int(20)|0</DataType>
+    </column>
+    <column id="68" parent="17" name="max_car">
+      <Position>7</Position>
+      <Comment>最大车流量</Comment>
+      <DataType>int(20)|0</DataType>
+    </column>
+    <column id="69" parent="17" name="create_time">
+      <Position>8</Position>
+      <Comment>创建时间</Comment>
+      <DataType>date|0</DataType>
+    </column>
+    <column id="70" parent="17" name="update_time">
+      <Position>9</Position>
+      <Comment>更新时间</Comment>
+      <DataType>date|0</DataType>
+    </column>
+    <column id="71" parent="17" name="creator">
+      <Position>10</Position>
+      <Comment>创建者</Comment>
+      <DataType>int(20)|0</DataType>
+    </column>
+    <column id="72" parent="17" name="status">
+      <Position>11</Position>
+      <DataType>int(2)|0</DataType>
+    </column>
+    <column id="73" parent="17" name="updator">
+      <Position>12</Position>
+      <DataType>int(20)|0</DataType>
+    </column>
+    <column id="74" parent="17" name="del_flag">
+      <Position>13</Position>
+      <DataType>int(2)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="75" parent="17" name="code">
+      <Position>14</Position>
+      <Comment>景区ID</Comment>
+      <DataType>varchar(225)|0</DataType>
+    </column>
+    <column id="76" parent="17" name="max_di">
+      <Position>15</Position>
+      <Comment>天气舒适度阈值</Comment>
+      <DataType>double(225,2)|0</DataType>
+    </column>
+    <key id="77" parent="17" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="78" parent="18" name="id">
+      <Position>1</Position>
+      <Comment>景区类型主键</Comment>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="79" parent="18" name="scenictype_name">
+      <Position>2</Position>
+      <Comment>景区类型名称</Comment>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="80" parent="18" name="del_flag">
+      <Position>3</Position>
+      <Comment>删除标记</Comment>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <key id="81" parent="18" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="82" parent="19" name="id">
+      <Position>1</Position>
+      <Comment>景区类型因子主键</Comment>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="83" parent="19" name="scenictype_id">
+      <Position>2</Position>
+      <Comment>景区类型id</Comment>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="84" parent="19" name="scenictype_name">
+      <Position>3</Position>
+      <Comment>景区类型因子名称</Comment>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="85" parent="19" name="scenictype_value">
+      <Position>4</Position>
+      <Comment>景区类型因子值</Comment>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="86" parent="19" name="del_flag">
+      <Position>5</Position>
+      <Comment>删除标记</Comment>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <key id="87" parent="19" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="88" parent="20" name="id">
+      <Position>1</Position>
+      <Comment>用户主键</Comment>
+      <DataType>int(255)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="89" parent="20" name="account">
+      <Position>2</Position>
+      <Comment>账户</Comment>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="90" parent="20" name="username">
+      <Position>3</Position>
+      <Comment>用户名</Comment>
+      <DataType>varchar(100)|0</DataType>
+    </column>
+    <column id="91" parent="20" name="password">
+      <Position>4</Position>
+      <Comment>密码</Comment>
+      <DataType>varchar(100)|0</DataType>
+    </column>
+    <column id="92" parent="20" name="role">
+      <Position>5</Position>
+      <Comment>角色</Comment>
+      <DataType>varchar(100)|0</DataType>
+    </column>
+    <column id="93" parent="20" name="phone">
+      <Position>6</Position>
+      <DataType>varchar(15)|0</DataType>
+    </column>
+    <column id="94" parent="20" name="sex">
+      <Position>7</Position>
+      <Comment>性别</Comment>
+      <DataType>int(2)|0</DataType>
+    </column>
+    <column id="95" parent="20" name="email">
+      <Position>8</Position>
+      <Comment>邮箱</Comment>
+      <DataType>varchar(25)|0</DataType>
+    </column>
+    <column id="96" parent="20" name="creat_time">
+      <Position>9</Position>
+      <Comment>创建时间 </Comment>
+      <DataType>date|0</DataType>
+    </column>
+    <column id="97" parent="20" name="updator">
+      <Position>10</Position>
+      <Comment>更新者</Comment>
+      <DataType>varchar(20)|0</DataType>
+    </column>
+    <column id="98" parent="20" name="creator">
+      <Position>11</Position>
+      <Comment>创建者</Comment>
+      <DataType>varchar(20)|0</DataType>
+    </column>
+    <column id="99" parent="20" name="update_time">
+      <Position>12</Position>
+      <Comment>更新时间</Comment>
+      <DataType>date|0</DataType>
+    </column>
+    <column id="100" parent="20" name="del_flag">
+      <Position>13</Position>
+      <Comment>删除标志</Comment>
+      <DataType>int(2)|0</DataType>
+    </column>
+    <key id="101" parent="20" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="102" parent="21" name="id">
+      <Position>1</Position>
+      <Comment>游客主键</Comment>
+      <DataType>int(255)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="103" parent="21" name="tourist_type">
+      <Position>2</Position>
+      <Comment>游客类型</Comment>
+      <DataType>int(3)|0</DataType>
+    </column>
+    <column id="104" parent="21" name="enter_day">
+      <Position>3</Position>
+      <Comment>进入日期</Comment>
+      <DataType>date|0</DataType>
+    </column>
+    <column id="105" parent="21" name="science_id">
+      <Position>4</Position>
+      <DataType>int(3)|0</DataType>
+    </column>
+    <column id="106" parent="21" name="enter_time">
+      <Position>5</Position>
+      <Comment>进入时间</Comment>
+      <DataType>datetime|0</DataType>
+    </column>
+    <column id="107" parent="21" name="leave_time">
+      <Position>6</Position>
+      <Comment>离开时间</Comment>
+      <DataType>datetime|0</DataType>
+    </column>
+    <column id="108" parent="21" name="del_flag">
+      <Position>7</Position>
+      <Comment>删除标记</Comment>
+      <DataType>int(2)|0</DataType>
+    </column>
+    <column id="109" parent="21" name="tourist_code">
+      <Position>8</Position>
+      <Comment>游客code</Comment>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <key id="110" parent="21" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+  </database-model>
+</dataSource>

@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssm.maven.core.dao.DI_TableDao">
+    <resultMap id="BaseResultMap" type="com.ssm.maven.core.entity.DiTable">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="Celsius" property="celsius" jdbcType="DOUBLE"/>
+        <result column="Fahrenheit" property="fahrenheit" jdbcType="DOUBLE"/>
+        <result column="relative_humidity" property="relativeHumidity" jdbcType="DOUBLE"/>
+        <result column="time_hour" property="timeHour" jdbcType="INTEGER"/>
+        <result column="time_date" property="timeDate" jdbcType="DATE"/>
+        <result column="DI" property="di" jdbcType="DOUBLE"/>
+        <result column="del_flag" property="delFlag" jdbcType="INTEGER"/>
+        <result column="type_weather" property="typeWeather" jdbcType="INTEGER"/>
+        <result column="scenics_id" property="scenicsId" jdbcType="INTEGER"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, Celsius, Fahrenheit, relative_humidity, time_hour, time_date, DI, del_flag, type_weather, 
+    scenics_id
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from di_table
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from di_table
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.ssm.maven.core.entity.DiTable">
+    insert into di_table (id, Celsius, Fahrenheit, 
+      relative_humidity, time_hour, time_date, 
+      DI, del_flag, type_weather, 
+      scenics_id)
+    values (#{id,jdbcType=INTEGER}, #{celsius,jdbcType=DOUBLE}, #{fahrenheit,jdbcType=DOUBLE}, 
+      #{relativeHumidity,jdbcType=DOUBLE}, #{timeHour,jdbcType=INTEGER}, #{timeDate,jdbcType=DATE}, 
+      #{di,jdbcType=DOUBLE}, #{delFlag,jdbcType=INTEGER}, #{typeWeather,jdbcType=INTEGER}, 
+      #{scenicsId,jdbcType=INTEGER})
+  </insert>
+    <insert id="insertSelective" parameterType="com.ssm.maven.core.entity.DiTable">
+        insert into di_table
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="celsius != null">
+                Celsius,
+            </if>
+            <if test="fahrenheit != null">
+                Fahrenheit,
+            </if>
+            <if test="relativeHumidity != null">
+                relative_humidity,
+            </if>
+            <if test="timeHour != null">
+                time_hour,
+            </if>
+            <if test="timeDate != null">
+                time_date,
+            </if>
+            <if test="di != null">
+                DI,
+            </if>
+            <if test="delFlag != null">
+                del_flag,
+            </if>
+            <if test="typeWeather != null">
+                type_weather,
+            </if>
+            <if test="scenicsId != null">
+                scenics_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="celsius != null">
+                #{celsius,jdbcType=DOUBLE},
+            </if>
+            <if test="fahrenheit != null">
+                #{fahrenheit,jdbcType=DOUBLE},
+            </if>
+            <if test="relativeHumidity != null">
+                #{relativeHumidity,jdbcType=DOUBLE},
+            </if>
+            <if test="timeHour != null">
+                #{timeHour,jdbcType=INTEGER},
+            </if>
+            <if test="timeDate != null">
+                #{timeDate,jdbcType=DATE},
+            </if>
+            <if test="di != null">
+                #{di,jdbcType=DOUBLE},
+            </if>
+            <if test="delFlag != null">
+                #{delFlag,jdbcType=INTEGER},
+            </if>
+            <if test="typeWeather != null">
+                #{typeWeather,jdbcType=INTEGER},
+            </if>
+            <if test="scenicsId != null">
+                #{scenicsId,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ssm.maven.core.entity.DiTable">
+        update di_table
+        <set>
+            <if test="celsius != null">
+                Celsius = #{celsius,jdbcType=DOUBLE},
+            </if>
+            <if test="fahrenheit != null">
+                Fahrenheit = #{fahrenheit,jdbcType=DOUBLE},
+            </if>
+            <if test="relativeHumidity != null">
+                relative_humidity = #{relativeHumidity,jdbcType=DOUBLE},
+            </if>
+            <if test="timeHour != null">
+                time_hour = #{timeHour,jdbcType=INTEGER},
+            </if>
+            <if test="timeDate != null">
+                time_date = #{timeDate,jdbcType=DATE},
+            </if>
+            <if test="di != null">
+                DI = #{di,jdbcType=DOUBLE},
+            </if>
+            <if test="delFlag != null">
+                del_flag = #{delFlag,jdbcType=INTEGER},
+            </if>
+            <if test="typeWeather != null">
+                type_weather = #{typeWeather,jdbcType=INTEGER},
+            </if>
+            <if test="scenicsId != null">
+                scenics_id = #{scenicsId,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.ssm.maven.core.entity.DiTable">
+    update di_table
+    set Celsius = #{celsius,jdbcType=DOUBLE},
+      Fahrenheit = #{fahrenheit,jdbcType=DOUBLE},
+      relative_humidity = #{relativeHumidity,jdbcType=DOUBLE},
+      time_hour = #{timeHour,jdbcType=INTEGER},
+      time_date = #{timeDate,jdbcType=DATE},
+      DI = #{di,jdbcType=DOUBLE},
+      del_flag = #{delFlag,jdbcType=INTEGER},
+      type_weather = #{typeWeather,jdbcType=INTEGER},
+      scenics_id = #{scenicsId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <select id="selectByScenic" parameterType="com.ssm.maven.core.entity.Scenicspot"
+            resultType="com.ssm.maven.core.entity.DiTable">
+        SELECT * FROM tourist.di_table WHERE scenic_id= #{scenic_id} AND time_date = #{time_date} AND del_flag = 1
+    </select>
+</mapper>

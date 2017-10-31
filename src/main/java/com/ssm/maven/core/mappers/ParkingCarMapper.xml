@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssm.maven.core.mappers.ParkingCarMapper">
+    <resultMap id="BaseResultMap" type="com.ssm.maven.core.entity.ParkingCar">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="license_car" property="licenseCar" jdbcType="VARCHAR"/>
+        <result column="enter_time" property="enterTime" jdbcType="TIMESTAMP"/>
+        <result column="leave_time" property="leaveTime" jdbcType="TIMESTAMP"/>
+        <result column="car_type" property="carType" jdbcType="INTEGER"/>
+        <result column="park_id" property="parkId" jdbcType="VARCHAR"/>
+        <result column="paymoney" property="paymoney" jdbcType="INTEGER"/>
+        <result column="del_flag" property="delFlag" jdbcType="INTEGER"/>
+        <result column="science_id" property="scienceId" jdbcType="INTEGER"/>
+        <result column="day" property="day" jdbcType="DATE"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, license_car, enter_time, leave_time, car_type, park_id, paymoney, del_flag, science_id, 
+    day
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from parking_car
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from parking_car
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.ssm.maven.core.entity.ParkingCar">
+    insert into parking_car (id, license_car, enter_time, 
+      leave_time, car_type, park_id, 
+      paymoney, del_flag, science_id, 
+      day)
+    values (#{id,jdbcType=INTEGER}, #{licenseCar,jdbcType=VARCHAR}, #{enterTime,jdbcType=TIMESTAMP}, 
+      #{leaveTime,jdbcType=TIMESTAMP}, #{carType,jdbcType=INTEGER}, #{parkId,jdbcType=VARCHAR}, 
+      #{paymoney,jdbcType=INTEGER}, #{delFlag,jdbcType=INTEGER}, #{scienceId,jdbcType=INTEGER}, 
+      #{day,jdbcType=DATE})
+  </insert>
+    <insert id="insertSelective" parameterType="com.ssm.maven.core.entity.ParkingCar">
+        insert into parking_car
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="licenseCar != null">
+                license_car,
+            </if>
+            <if test="enterTime != null">
+                enter_time,
+            </if>
+            <if test="leaveTime != null">
+                leave_time,
+            </if>
+            <if test="carType != null">
+                car_type,
+            </if>
+            <if test="parkId != null">
+                park_id,
+            </if>
+            <if test="paymoney != null">
+                paymoney,
+            </if>
+            <if test="delFlag != null">
+                del_flag,
+            </if>
+            <if test="scienceId != null">
+                science_id,
+            </if>
+            <if test="day != null">
+                day,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="licenseCar != null">
+                #{licenseCar,jdbcType=VARCHAR},
+            </if>
+            <if test="enterTime != null">
+                #{enterTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="leaveTime != null">
+                #{leaveTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="carType != null">
+                #{carType,jdbcType=INTEGER},
+            </if>
+            <if test="parkId != null">
+                #{parkId,jdbcType=VARCHAR},
+            </if>
+            <if test="paymoney != null">
+                #{paymoney,jdbcType=INTEGER},
+            </if>
+            <if test="delFlag != null">
+                #{delFlag,jdbcType=INTEGER},
+            </if>
+            <if test="scienceId != null">
+                #{scienceId,jdbcType=INTEGER},
+            </if>
+            <if test="day != null">
+                #{day,jdbcType=DATE},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ssm.maven.core.entity.ParkingCar">
+        update parking_car
+        <set>
+            <if test="licenseCar != null">
+                license_car = #{licenseCar,jdbcType=VARCHAR},
+            </if>
+            <if test="enterTime != null">
+                enter_time = #{enterTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="leaveTime != null">
+                leave_time = #{leaveTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="carType != null">
+                car_type = #{carType,jdbcType=INTEGER},
+            </if>
+            <if test="parkId != null">
+                park_id = #{parkId,jdbcType=VARCHAR},
+            </if>
+            <if test="paymoney != null">
+                paymoney = #{paymoney,jdbcType=INTEGER},
+            </if>
+            <if test="delFlag != null">
+                del_flag = #{delFlag,jdbcType=INTEGER},
+            </if>
+            <if test="scienceId != null">
+                science_id = #{scienceId,jdbcType=INTEGER},
+            </if>
+            <if test="day != null">
+                day = #{day,jdbcType=DATE},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.ssm.maven.core.entity.ParkingCar">
+    update parking_car
+    set license_car = #{licenseCar,jdbcType=VARCHAR},
+      enter_time = #{enterTime,jdbcType=TIMESTAMP},
+      leave_time = #{leaveTime,jdbcType=TIMESTAMP},
+      car_type = #{carType,jdbcType=INTEGER},
+      park_id = #{parkId,jdbcType=VARCHAR},
+      paymoney = #{paymoney,jdbcType=INTEGER},
+      del_flag = #{delFlag,jdbcType=INTEGER},
+      science_id = #{scienceId,jdbcType=INTEGER},
+      day = #{day,jdbcType=DATE}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssm.maven.core.dao.TouristDao">
+    <resultMap id="BaseResultMap" type="com.ssm.maven.core.entity.Tourist">
+        <result column="id" property="id" jdbcType="INTEGER"/>
+        <result column="tourist_type" property="touristType" jdbcType="INTEGER"/>
+        <result column="science_id" property="scienceId" jdbcType="INTEGER"/>
+        <result column="enter_time" property="enterTime" jdbcType="DATE"/>
+        <result column="leave_time" property="leaveTime" jdbcType="DATE"/>
+        <result column="del_flag" property="delFlag" jdbcType="INTEGER"/>
+    </resultMap>
+    <insert id="insert" parameterType="com.ssm.maven.core.entity.Tourist">
+    insert into tourist (id, tourist_type, science_id, 
+      enter_time, leave_time, del_flag
+      )
+    values (#{id,jdbcType=INTEGER}, #{touristType,jdbcType=INTEGER}, #{scienceId,jdbcType=INTEGER}, 
+      #{enterTime,jdbcType=DATE}, #{leaveTime,jdbcType=DATE}, #{delFlag,jdbcType=INTEGER}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.ssm.maven.core.entity.Tourist">
+        insert into tourist
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="touristType != null">
+                tourist_type,
+            </if>
+            <if test="scienceId != null">
+                science_id,
+            </if>
+            <if test="enterTime != null">
+                enter_time,
+            </if>
+            <if test="leaveTime != null">
+                leave_time,
+            </if>
+            <if test="delFlag != null">
+                del_flag,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="touristType != null">
+                #{touristType,jdbcType=INTEGER},
+            </if>
+            <if test="scienceId != null">
+                #{scienceId,jdbcType=INTEGER},
+            </if>
+            <if test="enterTime != null">
+                #{enterTime,jdbcType=DATE},
+            </if>
+            <if test="leaveTime != null">
+                #{leaveTime,jdbcType=DATE},
+            </if>
+            <if test="delFlag != null">
+                #{delFlag,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="deleteTouristByCode" parameterType="com.ssm.maven.core.entity.ScenicspotCustom">
+        UPDATE tourist t , scenicspot s SET t.del_flag = 0 WHERE s.code = #{code} AND s.id = t.science_id AND t.enter_day = #{enter_day}
+    </update>
+
+    <update id="deleteByTouristCode" parameterType="com.ssm.maven.core.entity.TouristCustom">
+        UPDATE tourist t SET t.del_flag = 0 WHERE t.tourist_code = #{tourist_code}
+    </update>
+
+    <select id="getTouristList" parameterType="com.ssm.maven.core.entity.TouristCustom"
+            resultType="com.ssm.maven.core.entity.TouristCustom">
+        SELECT tourist.*,scenicspot.scenicname,scenicspot.address,scenicspot.code,scenicspot.max_people FROM
+        tourist,scenicspot WHERE
+        <if test="code!=null and code !=''">
+            scenicspot.code = #{code} AND
+        </if>
+        scenicspot.id = tourist.science_id
+        <if test="enter_day!=null and enter_day!=''">
+            AND tourist.enter_day = #{enter_day}
+        </if>
+        AND scenicspot.del_flag = 1
+    </select>
+
+    <select id="searchTouristInfor" parameterType="com.ssm.maven.core.entity.TouristCustom"
+            resultType="com.ssm.maven.core.entity.TouristCustom">
+        SELECT tourist.*,scenicspot.* FROM tourist,scenicspot WHERE
+        scenicspot.id = tourist.science_id
+        <if test="science_id != null and science_id !='' ">
+            AND scenicspot.id = #{science_id}
+        </if>
+        <if test="tourist_code != null and tourist_code !='' ">
+            AND tourist.tourist_code = #{tourist_code}
+        </if>
+        <if test="enter_time != null and enter_time !='' ">
+            <![CDATA[   AND DATE_FORMAT(enter_time, '%Y-%m-%d-%h-%I-%S')>=  DATE_FORMAT(#{enter_time}, '%Y-%m-%d-%h-%I-%S')   ]]>
+        </if>
+        <if test="leave_time != null and leave_time !='' ">
+            <![CDATA[   AND DATE_FORMAT(leave_time, '%Y-%m-%d-%h-%I-%S')<=  DATE_FORMAT(#{leave_time}, '%Y-%m-%d-%h-%I-%S')   ]]>
+        </if>
+        <if test="enter_day != null and enter_day  !='' ">
+            AND enter_day = #{enter_day}
+        </if>
+        AND tourist.del_flag = 1 ORDER BY tourist.time_hour ASC ,enter_day DESC
+    </select>
+
+    <select id="getCount" parameterType="com.ssm.maven.core.entity.TouristCustom" resultType="java.lang.Integer">
+        SELECT COUNT(DISTINCT time_hour) FROM tourist WHERE tourist.enter_day = #{enter_day} AND tourist.science_id = #{science_id}
+    </select>
+
+    <update id="updateTouristInfor" parameterType="com.ssm.maven.core.entity.Tourist">
+        UPDATE tourist SET tourist.enter_time = #{enter_time} , tourist.tourist_type = #{tourist_type},
+        tourist.leave_time = #{leave_time} WHERE tourist.tourist_code = #{tourist_code}
+    </update>
+
+    <insert id="insertTouristBatch" parameterType="com.ssm.maven.core.entity.Tourist" useGeneratedKeys="true">
+        <selectKey resultType="long" keyProperty="id" order="AFTER">
+            SELECT
+            LAST_INSERT_ID()
+        </selectKey>
+        insert into tourist
+        (tourist_type,enter_day,science_id,enter_time,leave_time,del_flag,tourist_code,time_hour)
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.tourist_type},#{item.enter_day},#{item.science_id},#{item.enter_time},#{item.leave_time},#{item.del_flag},#{item.tourist_code},#{item.time_hour})
+        </foreach>
+    </insert>
+
+    <!--获取该时间段的人数-->
+    <select id="getNumByCodeAndTime" parameterType="com.ssm.maven.core.entity.Tourist" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM tourist WHERE #{enter_time} BETWEEN tourist.enter_time and tourist.leave_time AND tourist.del_flag=1 AND tourist.science_id=#{science_id}
+    </select>
+
+</mapper>

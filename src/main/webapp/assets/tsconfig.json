@@ -1,0 +1,37 @@
+{
+  "count": 3,
+  "list": [
+    {
+      "address": "成都市蒲江县",
+      "code": "1",
+      "create_Time": "2017-07-26",
+      "creator": "1",
+      "del_flag": 1,
+      "id": 1,
+      "max_Car": 2500,
+      "max_People": 10000,
+      "scenicname": "石象湖",
+      "status": 1,
+      "telephone": "15928588606",
+      "update_Time": "2017-07-26",
+      "updator": "1"
+    },
+    {
+      "address": "四川省成都市都江堰市",
+      "code": "2",
+      "create_Time": "2017-07-27",
+      "creator": "1",
+      "del_flag": 1,
+      "id": 2,
+      "max_Car": 2500,
+      "max_People": 10000,
+      "scenicname": "青城山",
+      "status": 0,
+      "telephone": "15928588606",
+      "update_Time": "2017-07-27",
+      "updator": "1"
+    }
+  ],
+  "msg": "获取成功",
+  "rel": "true"
+}

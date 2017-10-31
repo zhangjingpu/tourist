@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ssm.maven.core.dao.CarDao">
+    <!--查询所有景区-->
+    <select id="getAllScenicspot" resultType="com.ssm.maven.core.entity.Scenicspot">
+        SELECT * FROM scenicspot
+    </select>
+    <!--获取所有景区每天的车辆信息-->
+    <select id="getAllSpotCar" resultType="com.ssm.maven.core.entity.CarCustom">
+        SELECT DISTINCT parking_car.day,scenicspot.code,scenicspot.address,scenicspot.scenicname,scenicspot.max_car
+        FROM parking_car,scenicspot
+        WHERE parking_car.science_id=scenicspot.code AND scenicspot.del_flag=1 AND parking_car.del_flag=1
+        ORDER BY scenicspot.code ASC, parking_car.day ASC
+    </select>
+
+    <!--根据时间和景区名查询-->
+    <select id="findSpotCarByNameOrTime" parameterType="com.ssm.maven.core.entity.CarCustom"
+            resultType="com.ssm.maven.core.entity.CarCustom">
+        SELECT DISTINCT
+        parking_car.day,scenicspot.code,scenicspot.address,scenicspot.scenicname,scenicspot.max_car
+        FROM parking_car,scenicspot
+        WHERE parking_car.science_id=scenicspot.code AND scenicspot.del_flag=1 AND parking_car.del_flag=1
+        <if test="start_day != null and start_day != '' and end_day != null and end_day!='' ">
+            AND parking_car.day between #{start_day} and #{end_day}
+        </if>
+        <if test="start_day != null and start_day != '' and end_day == null ">
+            AND parking_car.day <![CDATA[>=]]> #{start_day}
+        </if>
+        <if test="end_day != null and end_day!='' and start_day == null ">
+            AND parking_car.day <![CDATA[<=]]> #{end_day}
+        </if>
+        AND scenicname=#{scenicname}
+        ORDER BY scenicspot.code ASC, parking_car.day ASC
+    </select>
+
+    <!--获取指定的景区某天的所有车辆-->
+    <select id="findAllCarByCodeAndTime" parameterType="com.ssm.maven.core.entity.ParkingCar"
+            resultType="com.ssm.maven.core.entity.ParkingCar">
+        SELECT * FROM parking_car WHERE science_id=#{science_id} AND day=#{day} AND del_flag=1
+    </select>
+
+    <!--获取指定的景区某天的所有车辆的总数-->
+    <select id="getAllCarNumber" parameterType="com.ssm.maven.core.entity.ParkingCar" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM parking_car WHERE science_id=#{science_id} AND day=#{day} AND del_flag=1
+    </select>
+
+    <!--查询车辆信息-->
+    <select id="findCar" parameterType="com.ssm.maven.core.entity.ParkingCar"
+            resultType="com.ssm.maven.core.entity.ParkingCar">
+        SELECT * FROM parking_car WHERE day=#{day} AND del_flag=1 AND science_id=#{science_id} AND license_car LIKE
+        CONCAT(CONCAT('%',#{license_car}),'%') OR park_id LIKE CONCAT(CONCAT('%',#{license_car}),'%')
+    </select>
+    <!--根据车车辆的日期和景区code删除-->
+    <update id="deleteByCodeAndTime" parameterType="com.ssm.maven.core.entity.ParkingCar">
+        UPDATE parking_car SET del_flag=0 WHERE science_id=#{science_id} AND day=#{day}
+    </update>
+    <!--文件导入-->
+    <insert id="insertCarBatch" parameterType="java.util.List">
+
+        INSERT INTO parking_car
+        (license_car,enter_time,leave_time,car_type,park_id,del_flag,science_id,day)
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.license_car},#{item.enter_time},#{item.leave_time},#{item.car_type},#{item.park_id},#{item.del_flag},#{item.science_id},#{item.day})
+        </foreach>
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+            select LAST_INSERT_ID();
+        </selectKey>
+    </insert>
+
+    <!--导出-->
+    <select id="getAllCar" resultType="com.ssm.maven.core.entity.CarCustom">
+        SELECT parking_car.*,scenicspot.code,scenicspot.address,scenicspot.scenicname,scenicspot.max_car FROM parking_car,scenicspot WHERE parking_car.science_id=scenicspot.code AND parking_car.del_flag=1 AND scenicspot.del_flag=1
+    </select>
+
+    <!--c查询景区最大承载车量-->
+    <select id="getNumberByCode" parameterType="java.lang.Integer" resultType="com.ssm.maven.core.entity.Scenicspot">
+        SELECT scenicspot.* FROM scenicspot WHERE scenicspot.code=#{code}
+    </select>
+
+    <!--查询车辆数量更具时间和景区id-->
+    <select id="getNumByCodeAndTime" parameterType="com.ssm.maven.core.entity.ParkingCar"
+            resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM parking_car WHERE #{enter_time} BETWEEN enter_time AND leave_time AND del_flag=1 AND science_id=#{science_id}
+    </select>
+</mapper>
